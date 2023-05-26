@@ -22,7 +22,7 @@ for links in resultsLinks:
     urls.append(links['href'])
 
 counter = 0
-# Filters price listings to only show those under $280
+len = len(results)
 for x in resultsPrice:
     # Converts the price found from a string to a decimal float
     subString = x.text[1: 5]
@@ -31,12 +31,13 @@ for x in resultsPrice:
     try:
         filteredPrice = float(subString)
     except:
-        counter += 1
+        if counter < len:
+            counter += 1
         pass
 
+    # Filters price listings to only show those under $280
     if filteredPrice < 280:
         listingName = (results[counter].text + ' : ' + x.text + ' : ' + urls[counter])
         itemListing.append(listingName)
-    if counter < len(results):
+    if counter < len:
         counter += 1
-
