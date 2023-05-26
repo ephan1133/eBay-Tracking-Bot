@@ -11,13 +11,11 @@ results = soup.find_all('div', class_='s-item__title')
 resultsLinks = soup.find_all('a', class_="s-item__link")
 resultsPrice = soup.find_all('span', class_='s-item__price')
 
-# containers holding the links to the listings and their names
+# containers holding the links of the listing
 urls = []
-listings = []
 
-# adding all item names to their container
-for listing in results:
-    listings.append(listing.text)
+# Container holding listing name, price, and url
+itemListing = []
 
 # adding all links to their container
 for links in resultsLinks:
@@ -30,6 +28,8 @@ for x in resultsPrice:
     subString = x.text[1: 5]
     # Filters price listings to only show those under $280
     if float(subString) < 280:
-        print(results[counter].text,":", x.text,":" , urls[counter])
-    if counter < len(listings):
+        listingName = (results[counter].text,":", x.text,":" , urls[counter])
+        itemListing.append(listingName)
+    if counter < len(results):
         counter += 1
+
