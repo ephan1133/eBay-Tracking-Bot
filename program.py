@@ -27,9 +27,15 @@ for x in resultsPrice:
     # Need to find a way to handle exception when price found cannot be converted into float
     subString = x.text[1: 5]
     # Filters price listings to only show those under $280
-    if float(subString) < 280:
+    try:
+        filteredPrice = float(subString)
+    except:
+        counter += 1
+        pass
+    if filteredPrice < 280:
         listingName = (results[counter].text,":", x.text,":" , urls[counter])
         itemListing.append(listingName)
     if counter < len(results):
         counter += 1
 
+# need to find a way to handle ValueError: could not convert string to float: 'ap i' that occurs in line 30
