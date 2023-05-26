@@ -40,4 +40,3 @@ for x in resultsPrice:
     if counter < len(results):
         counter += 1
 
-# need to find a way to handle ValueError: could not convert string to float: 'ap i' that occurs in line 30
