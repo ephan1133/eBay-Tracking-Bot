@@ -26,15 +26,16 @@ counter = 0
 for x in resultsPrice:
     # Converts the price found from a string to a decimal float
     subString = x.text[1: 5]
+
     # Handles exception when subString is not able to be converted to decimal float
     try:
         filteredPrice = float(subString)
     except:
         counter += 1
         pass
-    
+
     if filteredPrice < 280:
-        listingName = (results[counter].text,":", x.text,":" , urls[counter])
+        listingName = (results[counter].text + ' : ' + x.text + ' : ' + urls[counter])
         itemListing.append(listingName)
     if counter < len(results):
         counter += 1
