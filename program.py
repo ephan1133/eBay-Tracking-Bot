@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from email.message import EmailMessage
 import ssl
+import smtplib
 
 # gets the webpage and creates a beautiful soup object to parse the web page 
 url = 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313&_nkw=sony+xm5"&"_sacat=0'
@@ -46,13 +47,15 @@ for x in resultsPrice:
 
 # EDIT THIS LINE IF USER WANTS TO CHANGE EMAIL DESTINATION
 destination = 'ephan6961@gmail.com'
+# sender of email
+sender = 'eppythonbotemail@gmail.com'
 
 # instantiating EmailMessage object
 email = EmailMessage()
 # 16 digit app password to email
 emailPassword = 'sfbfclbvpyfquymb'
 # setting email to send from
-email['From'] = 'eppythonbotemail@gmail.com'
+email['From'] = sender
 # setting the email to send to
 email['To'] = destination
 # setting subject of the email
@@ -66,3 +69,6 @@ email.set_content(body)
 
 context = ssl.create_default_context()
 
+with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+    smtp.login(sender, emailPassword)
+    smtp.sendmail(sender, destination, email.as_string()) 
