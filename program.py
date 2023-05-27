@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from email.message import EmailMessage
 
 # gets the webpage and creates a beautiful soup object to parse the web page 
 url = 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313&_nkw=sony+xm5"&"_sacat=0'
@@ -39,3 +40,6 @@ for x in resultsPrice:
         itemListing.append(listingName)
     if counter < len:
         counter += 1
+
+# this part of the code handles sending the user an email when there are eligible items
+emailPassword = 'sfbfclbvpyfquymb'
