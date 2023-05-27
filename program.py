@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from email.message import EmailMessage
+import ssl
 
 # gets the webpage and creates a beautiful soup object to parse the web page 
 url = 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313&_nkw=sony+xm5"&"_sacat=0'
@@ -42,4 +43,26 @@ for x in resultsPrice:
         counter += 1
 
 # this part of the code handles sending the user an email when there are eligible items
+
+# EDIT THIS LINE IF USER WANTS TO CHANGE EMAIL DESTINATION
+destination = 'ephan6961@gmail.com'
+
+# instantiating EmailMessage object
+email = EmailMessage()
+# 16 digit app password to email
 emailPassword = 'sfbfclbvpyfquymb'
+# setting email to send from
+email['From'] = 'eppythonbotemail@gmail.com'
+# setting the email to send to
+email['To'] = destination
+# setting subject of the email
+email['Subject'] = 'Here are the price listings currently'
+# creates the body of the email
+body = ''
+for item in itemListing:
+    body += item + "\n  \n"
+# setting the body of the email from created body message
+email.set_content(body)
+
+context = ssl.create_default_context()
+
