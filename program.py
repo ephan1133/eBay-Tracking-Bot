@@ -31,8 +31,6 @@ for x in resultsPrice:
     try:
         filteredPrice = float(subString)
     except:
-        if counter < len:
-            counter += 1
         pass
 
     # Filters price listings to only show those under $280
